@@ -1,4 +1,4 @@
-// Object constructot
+// Object constructor
 function SLL(list) {
     this.head = null;
 }
@@ -28,7 +28,7 @@ function Back(node) {
 }
 
 // Create a function that returns the last node's value
-function addBack(node, value) {
+function showLast(node, value) {
     var current = node;
     while (current.next != null) {
         current = current.next;
@@ -48,6 +48,6 @@ x.next = y;
 y.next = z;
 z.next = new Node("Bat")  // Another way of adding a node to the list
 
-addBack(x, "Umbrella");
-addBack(x, "Porpoise");
+// showLast(x, "Umbrella");
+// showLast(x, "Porpoise");
 Display(x);
