@@ -5,6 +5,7 @@ function binarySearch(val, arr) {
     var high = arr.length - 1;
     while (low <= high) {
         var mid = (low + (high - low)) / 2;
+        // if not a decimal
         if ((mid % 1) > 0) {
             mid = Math.floor(mid);
         }
