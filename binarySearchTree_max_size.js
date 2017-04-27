@@ -38,7 +38,6 @@ BST.prototype.add = function(val) {
 }
 
 
-
 // Find the tree's height (i.e. depth), aka the longest branch
 BTNode.prototype.height = function(){
     var left = 0
