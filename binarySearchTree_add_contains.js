@@ -15,7 +15,6 @@ BST.prototype.add = function(val) {
         var runner = this.root;
         var done = false;
         while (!done){
-
             if(val >= runner.val){
                 if (runner.right == null){
                     runner.right = new BTNode(val)

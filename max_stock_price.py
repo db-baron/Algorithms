@@ -4,7 +4,7 @@ def get_max_profit(stock_prices_yesterday):
     if len(stock_prices_yesterday) < 2:
         raise IndexError('Getting a profit requires at least 2 prices')
 
-    #  We'll greedily update min_price and max_profit, so we initialize them to the first price and the first possible profit    
+    #  We'll greedily update min_price and max_profit, so we initialize them to the first price and the first possible profit
 
     min_price = stock_prices_yesterday[0]
     max_profit = stock_prices_yesterday[1] - stock_prices_yesterday[0]
@@ -32,3 +32,6 @@ def get_max_profit(stock_prices_yesterday):
         min_price  = min(min_price, current_price)
 
     return max_profit
+
+
+print(get_max_profit([12, 4, 9, 2, 100, 5]))
