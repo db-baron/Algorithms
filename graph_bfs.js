@@ -3,13 +3,8 @@
 // Breadth-first Graph search - Traverse a graph with a queue to store visited nodes and adjacency list (type of graph)
 // This uses the sample graph shown at http://www.geeksforgeeks.org/wp-content/uploads/graph_representation12.png
 
-// We start the search at the source and assign it a distance of 0. Then we visit all the
-// neighbors of the source and give each neighbor a distance of 1 and set its predecessor to be the source.
-
-
-// Queueing functions
+// Queueing functions (I'm using an array, not an SLL)
 var Queue = function() {
-    this.head = 0;
     this.items = [];
 };
 Queue.prototype.enqueue = function(obj) {
@@ -36,12 +31,12 @@ var my_graph = [[1, 4],
 function bfs(graph, start_vertex){
     var queue = new Queue;  // Initialize a new queue to which vertices will be added as they are visted
     queue.enqueue(start_vertex);  // Add the starting vertex to the queue
-    // Create empty distance array. With 6 vertices it should end up being: distance_array = [0, 0, 0, 0, 0];
+    // Create empty distance array. With 6 vertices it should end up being: distance_array = [null, null, null, null, null];
     var distance_array = [];
     for (x in graph){
         distance_array.push(null)
     }
-    distance_array[start_vertex] = 0
+    distance_array[start_vertex] = 0   // Sets the distance of the the start vertex to itself, which it always 0.
 
     while (!queue.isEmpty()) {
         var current_idx = queue.dequeue();            // Set current vertex to the vertex that was just dequeued
