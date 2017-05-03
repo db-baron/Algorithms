@@ -1,14 +1,11 @@
 // Given a sorted array and a value, return whether the array contains the value. Do not sequntially iterate the array.
 // Instead, divide and conquer taking advantaged of the fact that the array is sorted.
+
 function binarySearch(val, arr) {
     var low  = 0;
     var high = arr.length - 1;
     while (low <= high) {
-        var mid = (low + (high - low)) / 2;
-        // if not a decimal
-        if ((mid % 1) > 0) {
-            mid = Math.floor(mid);
-        }
+        var mid = Math.floor((low + high) / 2);
         if (val < arr[mid]) {
             high = mid - 1;
         }
@@ -16,10 +13,10 @@ function binarySearch(val, arr) {
             low = mid + 1;
         }
         else {
-            return mid;
+            return "True. Found value of "+ mid + " in array";
         }
     }
-    return "error";
+    return "Value not in array";
 }
-var x = [1,2,4,5];
-console.log(binarySearch(2, x));
+var array1 = [1, 2, 3, 4, 5, 7];
+console.log(binarySearch(7, array1));
