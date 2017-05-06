@@ -1,10 +1,10 @@
 function bubbleSort(array) {
   for (var i = 0; i < array.length; i++) { //Number of passes
-    for (var x = 0; x < (array.length - i- 1); x++) {   // You don't need
+    for (var x = 0; x < (array.length - i- 1); x++) {   // You don't need the - i but it reduces the time needed to complete the algorithm.
       if(array[x] > array[x+1]) {      //Compare the adjacent positions
-        var tmp = array[x];  //Temporary variable to hold the current number
-        array[x] = array[x+1]; //Replace current number with adjacent number
-        array[x+1] = tmp; //Replace adjacent number with current number
+        var tmp = array[x];
+        array[x] = array[x+1];
+        array[x+1] = tmp;  
       }
     }
   }
