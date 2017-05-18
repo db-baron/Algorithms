@@ -1,9 +1,7 @@
-// I think Ali took a photo of the solution Eli was showing on the big screen
-
-// Breadth-first Graph search - Traverse a graph with a queue to store visited nodes and adjacency list (type of graph)
+// Breadth-first Graph search for an array - Traverse a graph with a queue to store visited nodes and adjacency list (type of graph)
 // This uses the sample graph shown at http://www.geeksforgeeks.org/wp-content/uploads/graph_representation12.png
 
-// Queueing functions (I'm using an array, not an SLL)
+// Queueing functions (I'm using an array for my distance list, not an SLL)
 var Queue = function() {
     this.items = [];
 };
@@ -40,14 +38,17 @@ function bfs(graph, start_vertex){
 
     while (!queue.isEmpty()) {
         var current_idx = queue.dequeue();            // Set current vertex to the vertex that was just dequeued
+        console.log("current_idx is", current_idx);
         var current_vertex = graph[current_idx];
+        console.log("current_vertex is", current_vertex);
+
         console.log("current_vertex.length is", current_vertex.length);
         for (i = 0; i < current_vertex.length; i++){     // For each neighbor of the current vertex (i.e. 1, and 4 if we start at 0), check if it's been visited.
             console.log("distance_array[i] is", distance_array[i]);
             var neighbor = current_vertex[i];
             if (distance_array[neighbor] === null){                // If the vertex hasn't been visited yet, then add it to the queue.
                 queue.enqueue(neighbor);
-                distance_array[neighbor] = distance_array[current_idx] + 1  // When a vertex is dequeued/visited, add 1 to the distance array for each number of edges the dequeued vertex is away from the start vertex
+                distance_array[neighbor] = distance_array[current_idx] + 1;  // When a vertex is dequeued/visited, add 1 to the distance array for each number of edges the dequeued vertex is away from the start vertex
             }
         }
     }
