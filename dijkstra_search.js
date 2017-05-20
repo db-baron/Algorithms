@@ -78,7 +78,7 @@ function dijkstra(graph, start_vertex) {
         // console.log("visited[previous_v] is", visited[previous_v]);
         if (visited[current_vertex[0]][1] === Infinity){
             visited[previous_v] = current_vertex; // replace [null, Infinity] with [prev_vertex, distance]
-        } else if ( ){
+        } else if (visited[current_vertex[0]][1] > distance_to_vertex){
             visited[distance_to_vertex] = previous_v;
             visited[distance_to_vertex] += distance_to_vertex;
         }

@@ -8,7 +8,6 @@ function BTNode(val){
         this.right = null;
 }
 
-
 BST.prototype.add = function(val) {
     if (this.root == null){
         this.root = new BTNode(val)
