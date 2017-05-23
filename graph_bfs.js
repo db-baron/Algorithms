@@ -46,7 +46,7 @@ function bfs(graph, start_vertex){
         for (i = 0; i < current_vertex.length; i++){     // For each neighbor of the current vertex (i.e. 1, and 4 if we start at 0), check if it's been visited.
             console.log("distance_array[i] is", distance_array[i]);
             var neighbor = current_vertex[i];
-            if (distance_array[neighbor] === null){                // If the vertex hasn't been visited yet, then add it to the queue.
+            if (distance_array[neighbor] === null){    // If the vertex hasn't been visited yet, add it to the queue.
                 queue.enqueue(neighbor);
                 distance_array[neighbor] = distance_array[current_idx] + 1;  // When a vertex is dequeued/visited, add 1 to the distance array for each number of edges the dequeued vertex is away from the start vertex
             }
