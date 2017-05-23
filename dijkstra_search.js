@@ -27,8 +27,8 @@ priorityQueue.prototype.enqueue = function(prev_vertex, priority) {
     // this.items[i][1] is the distance from the prev vertex to the vertex that's being enqueued.
     for (var i = 0; i < this.items.length && this.items[i][1] > priority; i++); // This is where the priority queue takes place
         this.items.splice(i, 0, [prev_vertex, priority]) // add new element to this.items array at index i (while removing nothing).
-    console.log("Previous vertex is", this.items[i][0]);
-    console.log("Distance to enqueued vertex is", this.items[i][1]);
+    // console.log("Previous vertex is", this.items[i][0]);
+    // console.log("Distance to enqueued vertex is", this.items[i][1]);
 };
 
 priorityQueue.prototype.dequeue = function() {
@@ -64,32 +64,41 @@ function dijkstra(graph, start_vertex) {
     }
     var pqueue = new priorityQueue;  // Initialize a new queue to which vertices will be added as they are visted
     pqueue.enqueue(start_vertex, 0);  // Enqueue the start vertex and it's distance to itself, which is always 0.
+    console.log("The PRIORITY QUEUE IS NOW", pqueue);
 
     while (!pqueue.isEmpty()){
         //  Remove vertex from the PQ and explore all its edges
         var extracted_vertex = pqueue.dequeue();  // The vertex that gets dequeued first will have the lowest distance value because it was the first queued
+        console.log("Now DEQUEUEING " + extracted_vertex);
         var previous_v = extracted_vertex[0];
         var distance_to_vertex = extracted_vertex[1];
-        // var destination_vertex ;     // HOW DO I FIND THE VERTEX NUMBER OF WHAT JUST GOT DEQUEUED??? Well, isn't each i with a val > 0 a destination? Do you need to know what the current/destination vertex is?
+        // HOW DO I FIND THE VERTEX NUMBER OF WHAT JUST GOT DEQUEUED???
+        // IT'S the i in for i in graph[previous_v] ?
 
         // Visit all neighbor vertices of the dequeued vertex. Each i is a possible neighbor vertex
         for(var i = 0; i < graph[previous_v].length; i++){   // is is the distance values in the sub-array (previously called this j)
+            // console.log("##### In for loop iteration " + i + " . Each i is a value in a sub-array within graph");
             // var extracted_vertex_index = graph[visited[previous_v][0]];
             if (graph[previous_v][i] > 0){   // i > 0 means that the previous vertex has a connection to the vertex i
                 pqueue.enqueue(previous_v, graph[previous_v][i]);
-                console.log("Now Queueing previous vertex " + previous_v + " and distance " + graph[previous_v][i]);
-                console.log("The PRIORITY QUEUE IS NOW", pqueue);
-
-                var alt_dist = visited[previous_v][1] + distance_to_vertex;  // Sum the distance to prev vertex and distance to destination vertex.
-                console.log(" visited[previous_v][1] is " + visited[previous_v][1] + " distance_to_vertex is" + distance_to_vertex);
-                if (alt_dist < visited[previous_v][1]){
+                console.log("ENQUEUEING vertex with prev " + previous_v + " and dist " + graph[previous_v][i] + " PRIORITY QUEUE IS NOW ", pqueue);
+                console.log("visited[previous_v] is ", visited[previous_v]);
+                if (visited[i][0] === null){
+                    console.log("##### In for loop iteration " + i);
+                    console.log("The visited vertex " + visited[i] + " has a NULL value. Time to change that.");
                     visited[previous_v][0] = previous_v;
-                    visited[previous_v][1] = alt_dist;
+                    visited[previous_v][1] = distance_to_vertex;
+                } else {
+                    var alt_dist = visited[previous_v][1] + distance_to_vertex;  // Sum the distance to prev vertex and distance to destination vertex.
+                    console.log("alt_dist is " + alt_dist + "  visited[previous_v][1] is " + visited[previous_v][1] + "  distance_to_vertex is " + distance_to_vertex);
+                    if (alt_dist < visited[previous_v][1]){
+                        visited[previous_v][0] = previous_v;
+                        visited[previous_v][1] = alt_dist;
+                    }
                 }
             }
             console.log("visited is ", visited);
-            console.log("00000000000000000000000");
-            console.log("visited[previous_v] = " + visited[previous_v] + "  visited[previous_v][0] = " + visited[previous_v][0]);
+            // console.log("visited[previous_v] = " + visited[previous_v] + "  visited[previous_v][0] = " + visited[previous_v][0]);
         }
     }
     return visited;
