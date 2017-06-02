@@ -1,7 +1,7 @@
 // "Dijkstra's algorithm is a graph search that finds the shortest paths from
 //  a starting node to all accessible nodes, producing a shortest path tree.
 
-// Think of Dijkstra's algo as a breadth-first search for weighted graphs,
+// Think of Dijkstra's algo as a breadth-first search for distanceed graphs,
 
 //// Dijkstra Psuedo-code ////
 // 1. Enqueue start vertex.
@@ -39,15 +39,15 @@ priorityQueue.prototype.isEmpty = function() {
     return this.items.length === 0;
 };
 
-// Example Usage:
+// Example Usage of Priority Queue:
 // var my_priority_queue = new priorityQueue();
-//
-// my_priority_queue.enqueue(0, 4)
-// my_priority_queue.enqueue(0, 5)
-// my_priority_queue.enqueue(0, 2)
-// my_priority_queue.enqueue(0, 20)
+// my_priority_queue.enqueue(0, 1, 9)
+// my_priority_queue.enqueue(0, 2, 5)
+// my_priority_queue.enqueue(0, 3, 24)
+// my_priority_queue.enqueue(0, 4, 200)
 // console.log(my_priority_queue);
 // console.log(my_priority_queue.dequeue());
+
 
 var infinity = 1/0;
 
@@ -65,34 +65,40 @@ function dijkstra(graph, start_vertex) {
     }
     var pqueue = new priorityQueue;  // Initialize a new queue to which vertices will be added as they are visted
     pqueue.enqueue(start_vertex, start_vertex, 0);  // Enqueue the start vertex and it's distance to itself, which is always 0.
-    console.log("BEFORE WHILE LOOP The PRIORITY QUEUE IS ", pqueue);
 
+    // SET THE START VERTEX VALUES
+    visited[start_vertex][0] = start_vertex;
+    visited[start_vertex][1] = 0;
+    console.log("before while loop. vistited array is ", visited);
     while (!pqueue.isEmpty()){
         //  Remove vertex from the PQ and explore all its edges
-        console.log("\n TOP OF WHILE LOOP - visitedarray is ", visited);
         var extracted_vertex = pqueue.dequeue();  // The vertex that gets dequeued first will have the lowest distance value because it was the first queued
-        console.log("Now DEQUEUEING " + extracted_vertex + " PRIORITY QUEUE IS NOW ", pqueue);
         var previous_v = extracted_vertex[0];
         var current_v = extracted_vertex[1];
-        var distance_to_vertex = extracted_vertex[2];
+        var distance = extracted_vertex[2];
+        console.log("\n*** DEQUEUEING vertex " + current_v + " connected to prev vertex " + previous_v + " by a distance of " + distance);
+        console.log("vertex " + previous_v + " has a distance of " + visited[previous_v][1] + " from the start vertex");
+
     // Loop through all neighbors of the current/dequeued vertex and do the following (each i is a possible neighbor vertex).
-      // If distance_to_vertex + distance to previous_v is a shorter path than what is currently in the visited array...
-        //  1. Update distance in the visited array, (i.e.  visited[current_v][1] = visited[previous_v][1] + distance_to_vertex
+      // If distance + distance to previous_v is a shorter path than what is currently in the visited array...
+        //  1. Update distance in the visited array
         //  2. Insert current vertex into the priority queue (Even if the current vertex is already there)
-        for(var i = 0; i < graph[current_v].length; i++){
-            if (graph[current_v][i] >= 0){   // i >= 0 means that graph[current_v][i] is a neighbor of current_v
-                console.log("Now VISITING vertex " + current_v + "'s neighboring vertex " + i);
-                if (visited[current_v][1] == "Infinity") {
-                    visited[i][0] = previous_v;
-                    visited[i][1] = distance_to_vertex;
-                    console.log("Found a shorter path than " + visited[current_v][1] + " - visited arr is now ", visited);
-                } else if (visited[previous_v][1] + distance_to_vertex < visited[current_v][1]){
-                    visited[i][0] = previous_v;
-                    visited[i][1] = visited[previous_v][1] + distance_to_vertex;
-                    console.log("Found a shorter path than " + visited[current_v][1] + " - visited arr is now ", visited);
+        for (var neighbor = 0; neighbor < graph[current_v].length; neighbor++){
+            if (graph[current_v][neighbor] > 0){
+                console.log("Now Visiting vertex " + current_v + "'s neighbor " + neighbor)
+
+                console.log("Existing distance to " + neighbor + " from start_vertex is " + visited[neighbor][1]);
+                console.log("Alternate distance is: visited[current_v][1] of " + visited[current_v][1] + " PLUS a graph[current_v][neighbor of " + graph[current_v][neighbor] + " which is " + (distance + graph[current_v][neighbor]));
+                if (visited[neighbor][1] > visited[current_v][1] + graph[current_v][neighbor]) {
+                    console.log("!!!!!! ALTERNATIVE DISTANCE WINS!");
+                    visited[neighbor][1] = visited[current_v][1] + graph[current_v][neighbor];
+                    visited[neighbor][0] = current_v;
+                    console.log("Found a shorter path, visited array is now", visited);
+                    pqueue.enqueue(current_v, neighbor, graph[current_v][neighbor]);
+                    console.log("^^^^ NOW ENQUEUEING VERTEX " + neighbor);
+                    console.log("Priority queue is ", pqueue);
+                    console.log("\n");
                 }
-                pqueue.enqueue(current_v, i, graph[current_v][i]);
-                console.log("ENQUEUEING vertex " + i + " with previous vertex " + current_v + " current_v " + i + " and distance " + graph[previous_v][i] + " PRIORITY QUEUE IS NOW ", pqueue);
             }
         }
     }
