@@ -1,7 +1,7 @@
 // "Dijkstra's algorithm is a graph search that finds the shortest paths from
-//  a starting node to all accessible nodes, producing a shortest path tree.
+//  a starting vertex to all accessible vertices, producing a shortest path tree.
 
-// Think of Dijkstra's algo as a breadth-first search for distanceed graphs,
+// Think of Dijkstra's algo as a breadth-first search for weighted graphs,
 
 //// Dijkstra Psuedo-code ////
 // 1. Enqueue start vertex.
@@ -9,7 +9,7 @@
 // 3. For each vertex neighbor, first enqueue the vertex with the lowest edge value (logic inside .enqueue function).
 // 4. Dequeue the vertex and add the value of the edge to the distance array (aka visited).
 
-// the outer index is the vertices, the inner index is the edges
+// The outer array indices represent the vertices, the inner array values are the edges/distances
 var my_graph = [[ 0, 9, 5, 24, 200],
                 [-1, 0, 3, -1, -1],
                 [-1, 2, 0, 8, -1],
@@ -17,7 +17,7 @@ var my_graph = [[ 0, 9, 5, 24, 200],
                 [ 5, -1, -1, -1, 0],
 ];
 
-// From https://stackoverflow.com/questions/42919469/efficient-way-to-implement-priority-queue-in-javascript
+// Set priority queue functions
 var priorityQueue = function() {
     this.items = [];
 };
@@ -39,7 +39,7 @@ priorityQueue.prototype.isEmpty = function() {
     return this.items.length === 0;
 };
 
-// Example Usage of Priority Queue:
+// Example Usage of priority queue functions:
 // var my_priority_queue = new priorityQueue();
 // my_priority_queue.enqueue(0, 1, 9)
 // my_priority_queue.enqueue(0, 2, 5)
@@ -51,11 +51,26 @@ priorityQueue.prototype.isEmpty = function() {
 
 var infinity = 1/0;
 
+// Assume all graph vertices will be represented by sequential non-negative integers starting at 0
 function dijkstra(graph, start_vertex) {
-    var prev_vertex ;
-    // Use the array 'visted' instead of the distance_array like in graph_bfs.js
     var visited = [];
+    var prev_vertex ;
 
+    // Create a range of vertices and check if start_vertex exists within it.
+    function range(start, stop){
+        var range_arr =[start], iterator=start;
+        while( iterator < stop-1 ){
+            iterator++;
+            range_arr.push(iterator)
+        }
+        return range_arr;
+    };
+    if (range(0, graph.length).includes(start_vertex) == false){
+        console.log("List of all graph vertices:", range(0, graph.length));
+        return "Error. The start vertex must be a vertex in the graph";
+    }
+
+    // Create a visited array with initial conditions of all previous vertices being unknown (null) and all distances being infinity
     for (vertex in graph){
         if (vertex === start_vertex){
             visted.push([vertex, 0]);
@@ -63,15 +78,16 @@ function dijkstra(graph, start_vertex) {
             visited.push([null, infinity]);
         }
     }
-    var pqueue = new priorityQueue;  // Initialize a new queue to which vertices will be added as they are visted
-    pqueue.enqueue(start_vertex, start_vertex, 0);  // Enqueue the start vertex and it's distance to itself, which is always 0.
+    // Initialize a new queue to which vertices will be added as they are visted
+    var pqueue = new priorityQueue;
+    // Enqueue the start vertex and it's distance to itself. The distance of a vertex to itself is always 0
+    pqueue.enqueue(start_vertex, start_vertex, 0);
 
-    // SET THE START VERTEX VALUES
+    // Set the start vertex's values fo previous vertex and distance in the visited array.
     visited[start_vertex][0] = start_vertex;
     visited[start_vertex][1] = 0;
-    console.log("before while loop. vistited array is ", visited);
     while (!pqueue.isEmpty()){
-        //  Remove vertex from the PQ and explore all its edges
+        //  Remove vertex from the priority queue and explore all its edges
         var extracted_vertex = pqueue.dequeue();  // The vertex that gets dequeued first will have the lowest distance value because it was the first queued
         var previous_v = extracted_vertex[0];
         var current_v = extracted_vertex[1];
@@ -86,7 +102,6 @@ function dijkstra(graph, start_vertex) {
         for (var neighbor = 0; neighbor < graph[current_v].length; neighbor++){
             if (graph[current_v][neighbor] > 0){
                 console.log("Now Visiting vertex " + current_v + "'s neighbor " + neighbor)
-
                 console.log("Existing distance to " + neighbor + " from start_vertex is " + visited[neighbor][1]);
                 console.log("Alternate distance is: visited[current_v][1] of " + visited[current_v][1] + " PLUS a graph[current_v][neighbor of " + graph[current_v][neighbor] + " which is " + (distance + graph[current_v][neighbor]));
                 if (visited[neighbor][1] > visited[current_v][1] + graph[current_v][neighbor]) {
@@ -96,14 +111,14 @@ function dijkstra(graph, start_vertex) {
                     console.log("Found a shorter path, visited array is now", visited);
                     pqueue.enqueue(current_v, neighbor, graph[current_v][neighbor]);
                     console.log("^^^^ NOW ENQUEUEING VERTEX " + neighbor);
-                    console.log("Priority queue is ", pqueue);
+                    console.log("Priority queue is now ", pqueue);
                     console.log("\n");
                 }
             }
         }
     }
-    console.log("JUST EXITED WHILE LOOP");
+    console.log("\n\nThe shortest distance path from the start vertex to all vertices is: ");
     return visited;
 }
 
-console.log(dijkstra(my_graph, 0));
+console.log(dijkstra(my_graph, 1));
