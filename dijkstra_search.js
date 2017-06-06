@@ -1,15 +1,13 @@
-// "Dijkstra's algorithm is a graph search that finds the shortest paths from
-//  a starting vertex to all accessible vertices, producing a shortest path tree.
+// "Dijkstra's algorithm is a graph search that finds the shortest paths from a starting vertex to all accessible vertices, producing a shortest path tree.
+// This implementation of Dijkstra shortest path returns a 2-D array of vertices, visited[[previous vertex, distance],[previous vertex, distance]....]
 
-// Think of Dijkstra's algo as a breadth-first search for weighted graphs,
-
-//// Dijkstra Psuedo-code ////
+// Psuedo-code
 // 1. Enqueue start vertex.
 // 2. Dequeue start vertex and add edge value and previous vertex to distance array (aka visited).
 // 3. For each vertex neighbor, first enqueue the vertex with the lowest edge value (logic inside .enqueue function).
 // 4. Dequeue the vertex and add the value of the edge to the distance array (aka visited).
 
-// The outer array indices represent the vertices, the inner array values are the edges/distances
+// The outer array indices represent the graph's vertices, the inner array values represent the edges/distances
 var my_graph = [[ 0, 9, 5, 24, 200],
                 [-1, 0, 3, -1, -1],
                 [-1, 2, 0, 8, -1],
@@ -17,7 +15,7 @@ var my_graph = [[ 0, 9, 5, 24, 200],
                 [ 5, -1, -1, -1, 0],
 ];
 
-// Set priority queue functions
+// Establish priority queue functions
 var priorityQueue = function() {
     this.items = [];
 };
