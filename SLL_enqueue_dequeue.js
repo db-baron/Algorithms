@@ -27,16 +27,16 @@ function dequeue(list){
     if (!list.head){
         return "No head to dequeue"
     } else{
-    var temp = list.head
-    temp.next = null
-    }
-    list.head = list.head.next;
-    return temp;
+        var temp = list.head
+        temp.next = null
+        list.head = list.head.next;
+        return temp;
+    }    
 }
 
 var my_list = new SLL();
 
 console.log(enqueue(my_list, 12));
-console.log(enqueue(my_list, 40));
-console.log(enqueue(my_list, 98));
+
 console.log(dequeue(my_list));
+console.log("my_list is ", my_list);

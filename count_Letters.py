@@ -6,8 +6,7 @@ from collections import defaultdict
 def count(string):
     my_dict = defaultdict(int)
     for char in string:
-        char = char.lower()
-        if char in ("abcdefghijklmnopqrstuvwxyz"):
+        if char in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"):
             my_dict[char] += 1
     return my_dict
 
