@@ -1,15 +1,16 @@
 // Given a sorted array and a value, return whether the array contains the value. Do not sequntially iterate the array.
-// Instead, divide and conquer taking advantaged of the fact that the array is sorted.
-// Use Recursion this time.
+// Instead, recursively divide and conquer taking advantaged of the fact that the array is sorted.
 function recBinarySearch(val, arr, low, high) {
     if (!low && !high){
         var low  = 0;
         var high = arr.length - 1;
     }
-    var mid = Math.floor((low + high) / 2);
+
     if (low > high){
         return "Value not in array";
     }
+
+    var mid = Math.floor((low + high) / 2);
 
     if (val < arr[mid]) {
         high = mid - 1
