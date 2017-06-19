@@ -1,32 +1,64 @@
-class node:
-    def __init__(self):
-        self.value = None
+class Node:
+    def __init__(self, initial_val):
+        self.value = initial_val
         self.next = None
 
-class my_SLL:
+    def get_next(self):
+        return self.next
+
+    def set_next(self, new_next):
+        self.next = new_next
+
+    def get_value(self): # Kind of useless, can just do a if next.val = valueOfInterest instead
+        return self.value
+
+    def set_value(self, newval):
+        self.value = newval
+
+# temp = Node(213)
+# print temp.get_value()
+
+class SLL:
     def __init__(self):
-        self.currentnode = None
+        self.head = None
 
-    def node_add(self, value):
-        new_node = node()
-        new_node.value = value
-        new_node.next = self.currentnode
-        self.currentnode = new_node
+    def isEmpty(self):
+        return self.head == None # returns True if there's no head, i.e. there's not linked list
 
+    def search(self, val):
+        current = self.head
+        node_count = 1
+        while current:
+            if current.value == val:
+                return "Found val at node: ", node_count
+            else:
+                current = current.get_next()
+                node_count += 1
 
-    def deleteOdd(self):
-        node = self.currentnode
-        while node.next:
-            if node.value % 2 != 0:
-                if node.next.next:
-                    node.next = node.next.next
+    def add(self, val):
+        temp = Node(val)
+        temp.set_next(self.head)  # Place the new node ahead of the head node
+        self.head = temp    # Re-assign the temp as the head node
+
+    def delete(self, val):
+        current = self.head
+        previous = None
+        while current.next:
+            if current.get_value() == val:
+                if current.next:
+
                 else:
-                    node.next = None
-            node = node.next
+                    previous = current
+                    current = current.next
+            else:
+                current = current.get_next()
 
-my_SLL = my_SLL()
-my_SLL.node_add(1)
-my_SLL.node_add(2)
-my_SLL.node_add(3)
 
-my_SLL.deleteOdd()
+SLL = SLL()
+# SLL.add(12)
+SLL.add(12)
+SLL.add(4)
+SLL.add(23)
+SLL.delete(23)
+# print "tea", SLL.search(23)
+print SLL.search(12)
