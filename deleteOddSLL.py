@@ -9,7 +9,8 @@ class Node:
     def set_next(self, new_next):
         self.next = new_next
 
-    def get_value(self): # Kind of useless, can just do a if next.val = valueOfInterest instead
+    # Necessary because you can't do next.val
+    def get_value(self):
         return self.value
 
     def set_value(self, newval):
@@ -29,11 +30,12 @@ class SLL:
         current = self.head
         node_count = 1
         while current:
-            if current.value == val:
+            if current.get_value() == val:
                 return "Found val at node: ", node_count
             else:
                 current = current.get_next()
                 node_count += 1
+        return "Could not find value in linked list"
 
     def add(self, val):
         temp = Node(val)
@@ -43,22 +45,39 @@ class SLL:
     def delete(self, val):
         current = self.head
         previous = None
-        while current.next:
+        found = False
+        while current:
             if current.get_value() == val:
-                if current.next:
-
+                if previous is None:
+                    self.head = current.get_next()
                 else:
-                    previous = current
-                    current = current.next
+                    previous.set_next(current.get_next)
+                return "Deleted node with value: ", val
             else:
+                previous = current
                 current = current.get_next()
+        return "Value not in list"
 
+    def deleteOdd(self):
+        current = self.head
+        previous = None
+        while current.get_next():
+            if current.get_value() % 2 != 0:
+                if previous is None:
+                    self.head = current.get_next()
+                else:
+                    previous.set_next(current.get_next)
+                print "Deleted a node with an odd value"
+            previous = current
+            current = current.get_next()
 
 SLL = SLL()
-# SLL.add(12)
 SLL.add(12)
 SLL.add(4)
 SLL.add(23)
-SLL.delete(23)
-# print "tea", SLL.search(23)
+SLL.add(40)
+SLL.add(9)
+SLL.delete(50)
+print SLL.search(12)
+SLL.deleteOdd()
 print SLL.search(12)
