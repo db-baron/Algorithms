@@ -24,5 +24,5 @@ def  firstRepeatingLetter(s):
     else:
         return "No duplicates"
 
-mys = "abcba"  
+mys = "abcba"
 print firstRepeatingLetter(mys)
