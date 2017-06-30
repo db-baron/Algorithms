@@ -36,6 +36,7 @@ function Back(node) {
 }
 
 // Create a function that returns the last node's value
+// THIS SEEMS WRONG
 function showLast(node, value) {
     var current = node;
     while (current.next != null) {
@@ -58,6 +59,5 @@ y.next = z;
 x.value = "Cat";  // Replace value of node x with "Cat"
 z.next = new Node("Bat")  // Another way of adding a node to the list
 
-// showLast(x, "Umbrella");
-// showLast(x, "Porpoise");
+// console.log(showLast(x, "Cat"));
 console.log(Display(new_list));
