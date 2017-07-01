@@ -3,7 +3,7 @@ var longestPalindrome = function(string) {
   var result = "";
 
   var centeredPalindrome = function(left, right) {
-      while (left >= 0 && right < string.length && string[left] === string[right]) {
+      while (left >= 0 && right < string.length && string[left] === string[right] && string[left] !== " " && string[left] !== " ") {
           //expand in each direction.
           left--;
           right++;
