@@ -1,22 +1,30 @@
 # Make a generator that outputs the fibonacci sequence of numbers and
-# use a decorator to remember the fibonacci numbers that have been computed
+# use a decorator function to remember the fibonacci numbers that have been computed
 
-def cache(function):
-    cached_values = {} # Stores already computed fibonacci values
-    def wrapping_function(*args):
-        if args not in cached_values:
-            # Call the function only if we haven't already done it for those parameters
-            cached_values[args] = function(*args)
-        return cached_values[args]
-    return wrapping_function        
+# def cache(function):
+#     cached_values = {} # Stores already computed fibonacci values
+#     def wrapping_function(*args):
+#         if args not in cached_values:
+#             # Call the function only if we haven't already done it for those parameters
+#             cached_values[args] = function(*args)
+#         return cached_values[args]
+#     return wrapping_function
+#
+# @cache
+# def fibonacci(n):
+#     print ("calling fibonacci(%d)" % n)
+#     if n < 2:
+#         return n
+#     return fibonacci(n-1) + fibonacci(n-2)
+#
+# print([fibonacci(n) for n in range(1,6)])
+def decorator(fn):
+    def inner(n):
+        return fn(n)+1
+    return inner
 
-def fibonacci_generator(a, b):
-    while True:
-        yield a
-        a ,b = b, a+b
+@decorator
+def f(n):
+    return n + 1
 
-# Print all the numbers of the Fibonacci sequence that are lower than 1000
-for i in fibonacci_generator(0, 1):  # set 0 and 1 as the start points
-    if i > 15:
-        break
-    print(i)
+print f(7)
