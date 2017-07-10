@@ -19,12 +19,6 @@ Queue.prototype.isEmpty = function() {
 // var queue = new Queue();
 // console.log(queue.enqueue(28));
 
-var my_graph = [[1, 4],
-                [0, 2, 3, 4],
-                [1, 3],
-                [1, 2, 4],
-                [0, 1, 3],
-                ];
 
 function bfs(graph, start_vertex){
     var queue = new Queue;  // Initialize a new queue to which vertices will be added as they are visted

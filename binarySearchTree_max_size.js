@@ -60,6 +60,15 @@ BST.prototype.height = function(){
     }
 }
 
+// Swap the nodes (or values) in a bst with exactly two nodes that should go in the other's position
+BST.prototype.swap = function(root){
+    var runner = root
+    while (runner != null) {
+        pass
+    }
+}
+
+
 var my_BST = new BST();
 my_BST.add(10);
 my_BST.add(15);
@@ -69,4 +78,4 @@ my_BST.add(3);
 my_BST.add(1);
 
 console.log(my_BST)
-console.log(my_BST.height())
+console.log("The BST has a height of", my_BST.height())
