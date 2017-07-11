@@ -20,7 +20,7 @@ var priorityQueue = function() {
     this.items = [];
 };
 
-// enqueue is the only queue function that gets changed for priority queues (though we change all of their names)
+// enqueue is the only queue function that's different for doing priority queues instead of normal queues.
 priorityQueue.prototype.enqueue = function(prev_vertex, current_vertex, priority) {
     // this.items[i][1] is the distance from the prev vertex to the vertex that's being enqueued.
     for (var i = 0; i < this.items.length && this.items[i][2] > priority; i++); // This is where the priority queue takes place
@@ -86,7 +86,7 @@ function dijkstra(graph, start_vertex) {
     visited[start_vertex][1] = 0;
     while (!pqueue.isEmpty()){
         //  Remove vertex from the priority queue and explore all its edges
-        var extracted_vertex = pqueue.dequeue();  // The vertex that gets dequeued first will have the lowest distance value because it was the first queued
+        var extracted_vertex = pqueue.dequeue();  // The vertex that gets dequeued first will have the shortest distance value.
         var previous_v = extracted_vertex[0];
         var current_v = extracted_vertex[1];
         var distance = extracted_vertex[2];

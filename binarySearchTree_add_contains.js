@@ -1,3 +1,5 @@
+var exports = module.exports = {};
+
 function BST(){
     this.root = null;
 }
@@ -10,22 +12,22 @@ function BTNode(val){
 
 BST.prototype.add = function(val) {
     if (this.root == null){
-        this.root = new BTNode(val)
+        this.root = new BTNode(val);
     } else {
         var runner = this.root;
         var done = false;
         while (!done){
             if(val >= runner.val){
                 if (runner.right == null){
-                    runner.right = new BTNode(val)
-                    done = true
+                    runner.right = new BTNode(val);
+                    done = true;
                 } else {
                     runner = runner.right;
                 }
             }
             else {
                 if (runner.left == null){
-                    runner.left= new BTNode(val)
+                    runner.left= new BTNode(val);
                     done = true;
                 } else {
                     runner = runner.left;
@@ -61,3 +63,6 @@ my_BST.add(4);
 console.log(my_BST);
 
 console.log(my_BST.contains(15, my_BST.root))
+
+// Export to binarySearch_swap.js
+module.exports = BST;
