@@ -39,7 +39,7 @@ BST.prototype.add = function(val) {
 
 // Contains method. Find if the tree contains a val
 BST.prototype.contains = function(val, root){
-    var runner = this.root
+    var runner = this.root;
     while (runner){
         if (runner.val == val){
             return true;
