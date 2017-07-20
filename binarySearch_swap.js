@@ -19,6 +19,15 @@ console.log(my_BST.contains(99, my_BST.root))
 
 
 BST.prototype.swap = function(){
+    var trav_arr = [];
+    var runner = this.root;
+    while (trav_arr.length < 2) {
+        if (runner.left.val > runner.right.val) {
+            trav_arr.append()
+        } else if {
+
+        }
+    }
 // Maybe make an additional array which has the inorder traversal of
 // the tree and also saves the pointer to each node.
 // Then traverse the array and find the 2 nodes that are not in the
