@@ -1,5 +1,6 @@
 // Two of the nodes of a Binary Search Tree (BST) are swapped. Fix the BST.
 // See https://stackoverflow.com/questions/11824946/in-a-bst-two-nodes-are-randomly-swapped-we-need-to-find-those-two-nodes-and-swap
+// http://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/
 function BST(){
     this.root = null;
 }

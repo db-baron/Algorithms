@@ -3,9 +3,9 @@ function BST(){
 }
 
 function BTNode(val){
-        this.val = val;
-        this.left = null;
-        this.right = null;
+    this.val = val;
+    this.left = null;
+    this.right = null;
 }
 
 BST.prototype.add = function(val) {
