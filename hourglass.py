@@ -7,23 +7,22 @@
 #  @@@
 # @@@@@
 
-def hour(n):
-    i = n
+def hourglass(n):
+    x = n
     LS = ""
     RS = ""
-    while(i>=1):
-        print(LS + "@"*i + RS )
-        i -= 2
+    for i in range(n):
+        print(LS + "@"*x + RS)
+        if x <= 2:
+            break
+        x -= 2
         LS += " "
         RS += " "
-    while(i<=n):
-        print(LS + "@"*i + RS)
-        i += 2
-        LS.strip(" ")
-        RS.strip(" ")
-print(hour(5))
-
-
-# def pyramid(rows=8):
-#   for i in range(rows):
-#       print ' '*(rows-i-1) + '*'*(2*i+1)
+    marker = 0
+    while(x<=n):
+        print(LS[marker:] + "@"*x + RS[:-marker])
+        x += 2
+        marker += 1
+    print("Done")
+    
+print(hourglass(6))
