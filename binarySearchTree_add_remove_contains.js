@@ -3,9 +3,9 @@ function BST(){
 }
 
 function BTNode(val){
-        this.val = val;
-        this.left = null;
-        this.right = null;
+    this.val = val;
+    this.left = null;
+    this.right = null;
 }
 
 BTNode.prototype.add = function(val) {
@@ -39,19 +39,22 @@ BTNode.prototype.add = function(val) {
 BTNode.prototype.remove = function(val, root){
     var runner = this.root;
     while (runner){
-    // compare the node's value with the value
-        if (value < runner.val) {
-            // check if there is a left node
+    // Compare the node's value with the value
+        if (val < runner.val) {
+            // Check if there is a left node
             if ( runner.left ) {
-                runner.left = this.remove( value, node.left );
+                runner.left = this.remove(val, node.left );
+            }
+            // Check if there is a right node
+            if ( runner.right ){
+                runner.right = this.remove(val, node.right);
             }
         }
     }
 }
 
 
-
-// Contains method. Find if the tree contains a val
+// Contains method. Find if the tree contains a value
 BTNode.prototype.contains = function(val, root){
     var runner = this.root;
     while (runner){
@@ -69,6 +72,7 @@ BTNode.prototype.contains = function(val, root){
 }
 
 
+// var my_BTNode = new BTNode();
 var my_BTNode = new BTNode();
 my_BTNode.add(10);
 my_BTNode.add(15);
@@ -76,4 +80,5 @@ my_BTNode.add(8);
 my_BTNode.add(4);
 console.log(my_BTNode);
 
-console.log(my_BTNode.contains(15, my_BTNode.root))
+console.log(my_BTNode.contains(15, my_BTNode.root));
+// console.log(my_BTNode.remove(15, my_BTNode.root));

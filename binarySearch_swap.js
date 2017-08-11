@@ -1,18 +1,19 @@
 // Two of the nodes of a Binary Search Tree (BST) are swapped. Fix the BST.
 // See https://stackoverflow.com/questions/11824946/in-a-bst-two-nodes-are-randomly-swapped-we-need-to-find-those-two-nodes-and-swap
 // http://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/
-function BST(){
-    this.root = null;
-}
 
-function BTNode(val){
-    this.val = val;
-    this.left = null;
-    this.right = null;
-}
+// function BST(){
+//     this.root = null;
+// }
+//
+// function BTNode(val){
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+// }
 
 // import BST.prototype.add from binarySearchTree_add_contains.js to create tree
-var BST = require('./binarySearchTree_add_contains.js')
+var BST = require('./binarySearchTree_add_remove_contains.js')
 
 var my_BST = new BST();
 my_BST.add(99);
