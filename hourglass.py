@@ -24,5 +24,5 @@ def hourglass(n):
         x += 2
         marker += 1
     print("Done")
-    
+
 print(hourglass(6))

@@ -1,3 +1,6 @@
+# Implement K-means clustering using defaultdict.
+# https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials'
+
 from pprint import pprint
 from math import fsum, sqrt
 from collections import defaultdict
@@ -22,7 +25,7 @@ def transpose(matrix):
 # print(list(transpose([[10,20,30],[40,50,60]])))
 
 
-def assign_data(centroids, points):
+def assign_data(centroids, points)``:
     # Assign each point to closest centroid
     d = defaultdict(list) # defaultdict on list creates an empty list
     for point in points:
@@ -58,9 +61,14 @@ my_points = [
 def k_means(data, k=2, iterations = 10):
     centroids = sample(data, k)
     for i in range(iterations):
+        # Each data point is assigned to a single cluster
         labeled = assign_data(centroids, data)
         centroids = compute_centroids(labeled.values())
     return centroids
+
+centroids = k_means(my_points, k=2)
+labeled = assign_data(centroids, my_points)
+pprint(labeled, width=120)
 
 centroids = k_means(my_points, k=3)
 labeled = assign_data(centroids, my_points)
