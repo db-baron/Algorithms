@@ -22,26 +22,47 @@ class Stack:
     def length(self):
         return len(self.items)
 
-myStack = Stack()
-charstr = '3[ab]cd'
-for i in charstr:
-    myStack.push(i)
+def is_number(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
 
-final_output = ""
-substring = ""
-sub_destack = ""
-cont = True
-for m in range(myStack.length()-1):
-    destacked = myStack.pop()
-    print ("destacked is ", destacked)
-    if destacked == "]":
-        while (cont):
-            sub_destack = myStack.pop()
-            if (sub_destack != "["):
-                substring += sub_destack
-                cont = False
-        # else:
-    elif (destacked != "["):
-        final_output += destacked
-final_output = final_output[::-1]
-print(final_output)
+
+def character_math(charstr):
+    final_output = ""
+    substring = ""
+    multiplier = None
+    for i in charstr:
+        myStack.push(i)
+
+    for m in range(myStack.length()-2):
+        print ("m is ", m)
+        destacked = myStack.pop()
+        # We want to go to the inner-most right bracket
+        if destacked != "]":
+            substring += destacked
+            print ('substring is ', substring)
+        if destacked == "[":
+            possible_multiplier = myStack.pop()
+            print("possible_multiplier is ", possible_multiplier)
+            print("possible_multiplier is a number", is_number(possible_multiplier))
+            if is_number(possible_multiplier):
+                # print("IIIIIINNNN")
+                print ("Now multiplying ", possible_multiplier, " by ", substring)
+                final_output += int(possible_multiplier)*substring
+            else:
+                final_output += possible_multiplier
+        final_output += substring
+
+    final_output = final_output[::-1]
+    return "Final output is ", final_output
+
+
+myStack = Stack()
+
+# 2[a3[bc]] should output 'abcbcbcabcbcbc'
+sample_str = '2[a3[bc]]'
+
+print(character_math(sample_str))
