@@ -28,7 +28,7 @@ function isBST(root){
         return false;
     }
     // Log the current data for debugging and update last_logged Value
-    console.log("Current Node is ", root.val)
+    // console.log("Current Node is ", root.val)
     last_logged = root.val
 
     // Verify and recurse right
@@ -40,10 +40,37 @@ function isBST(root){
 }
 
 // import BST.prototype.add from binarySearchTree_add_contains.js to create tree
-var BST = require('./binarySearchTree_add_remove_contains.js')
+var BST = require('./binarySearchTree_add_remove_contains.js').BST
+var BTNode = require('./binarySearchTree_add_remove_contains.js').BTNode
+
+// Create a Binary Tree as a sample input
+var root = {
+  data : 8,
+  left : null,
+  right : null
+};
+var n1 = {
+  data : 10,
+  left : null,
+  right : null
+};
+
+var n2 = {
+  data : 6,
+  left : null,
+  right : null
+};
+
 
 var my_BST = new BST();
-my_BinaryTree.add(2);
-my_BinaryTree.add(6);
-my_BinaryTree.add(9);
-console.log(isBST(my_BinaryTree));
+
+my_BST.root = root;
+
+// Create a Binary Search Tree (BST) and Verify
+my_BST.root.left = n2;
+my_BST.root.right = n1;
+console.log(isBST(my_BST.root)); // true
+
+// Create a non-BST and Verify
+my_BST.root.left = n1;
+console.log(isBST(my_BST.root)); // false

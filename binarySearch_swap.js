@@ -12,9 +12,9 @@
 //     this.right = null;
 // }
 
-// import BST.prototype.add from binarySearchTree_add_contains.js to create tree
-var BST = require('./binarySearchTree_add_remove_contains.js')
-
+// import BST and BTNode functions from binarySearchTree_add_contains.js to create tree
+var BST = require('./binarySearchTree_add_remove_contains.js').BST
+var BTNode = require('./binarySearchTree_add_remove_contains.js').BTNode
 var my_BST = new BST();
 my_BST.add(99);
 console.log(my_BST.contains(99, my_BST.root))
@@ -26,8 +26,8 @@ BST.prototype.swap = function(){
     while (trav_arr.length < 2) {
         if (runner.left.val > runner.right.val) {
             trav_arr.append()
-        } else if {
-
+        } else if (runner.right.val == "???" ){
+            continue
         }
     }
 // Maybe make an additional array which has the inorder traversal of

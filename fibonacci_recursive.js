@@ -11,4 +11,4 @@ function fib(n){
     }
 }
 
-console.log(fib(7));
+console.log(fib(8));

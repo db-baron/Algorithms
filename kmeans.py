@@ -25,7 +25,7 @@ def transpose(matrix):
 # print(list(transpose([[10,20,30],[40,50,60]])))
 
 
-def assign_data(centroids, points)``:
+def assign_data(centroids, points):
     # Assign each point to closest centroid
     d = defaultdict(list) # defaultdict on list creates an empty list
     for point in points:
@@ -49,13 +49,13 @@ def compute_centroids(groups):
 # print(compute_centroids(my_groups))
 
 my_points = [
-(10, 41, 23),
-(22, 30, 29),
-(11, 42, 5),
-(20, 32, 4),
-(12, 40, 12),
-(21, 36, 23)
-]
+        (10, 41, 23),
+        (22, 30, 29),
+        (11, 42, 5),
+        (20, 32, 4),
+        (12, 40, 12),
+        (21, 36, 23)
+    ]
 
 # k is the number of groups you want to have. 10 iterations is usually good
 def k_means(data, k=2, iterations = 10):

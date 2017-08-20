@@ -3,8 +3,17 @@ from Bio.Seq import Seq
 from Bio.Alphabet import generic_dna
 from Bio.SeqUtils import GC
 from Bio.SeqIO.FastaIO import FastaIterator
-import csv
+import csv, re
 
+# fasta_filename = "/Users/Megatron/Documents/Bioinformatics/poplar-primers_short.fa"
+# fasta_filename = "/Users/Megatron/Documents/Bioinformatics/poplar-primers.fa"
+
+fasta_filename = raw_input("Enter the name of a fasta file. Please include "
+                           "path if file is outside current directory: ")
+gc_output = "GCoutput_" + fasta_filename.rsplit( ".", 1 )[ 0 ] + ".csv"
+
+
+'''
 # Load fasta file (.fasta or .fa formated file) with a single sequence
 with open("/Users/Megatron/Documents/Bioinformatics/BRCA1_test.fasta") as f:
 # with open("/Users/Megatron/Documents/Bioinformatics/poplar-primers_short.fa") as f:
@@ -18,22 +27,22 @@ with open("/Users/Megatron/Documents/Bioinformatics/BRCA1_test.fasta") as f:
     print ('The sequence %s is %i bases long' % (my_seq, len(my_seq)))
     print ('reverse complement is %s' % str_seq.reverse_complement())
     print ('protein translation is %s' % str_seq.translate())
+'''
 
 
-# Make a function for writing outputs to a csv file
-def csv_writer(data, path):
-    # Write data to a CSV file path
-    with open(path, "wb") as csv_file:
-        writer = csv.writer(csv_file, delimiter=',')
-        for line in data:
-            writer.writerow(line)
+fasta_sequences = SeqIO.parse(open(fasta_filename),'fasta')
 
-def gc_content(sequence):
-    return GC(sequence)
-
-fasta_sequences = SeqIO.parse(open("/Users/Megatron/Documents/Bioinformatics/poplar-primers_short.fa"),'fasta')
-with open("/Users/Megatron/Documents/Bioinformatics/output_poplar-primers_short.fa", "wb") as csvfile:
+with open(gc_output, "wb") as csvfile:
     filewriter = csv.writer(csvfile, delimiter=',')
     for fasta in fasta_sequences:
-        name = fasta.id
+        # name = fasta.id   # Just the first word in the description
+        # Replace whitespace between words in sequence description with underscore
+        full_description = re.sub("\s+", "_", fasta.description)
+        print(full_description)
         sequence = str(fasta.seq)
+        print(sequence)
+        gc_content = "%.2f" % GC(sequence) # limit gc percentage to 2 decimal places
+        print(gc_content)
+        filewriter.writerow([full_description, gc_content])
+
+fasta_sequences.close()

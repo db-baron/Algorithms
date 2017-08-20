@@ -1,14 +1,16 @@
-function BST(){
+// Assign the functions BST and BTNode to vars for late module.exports
+var BST = function BST(){
     this.root = null;
 }
 
-function BTNode(val){
+var BTNode = function BTNode(val){
     this.val = val;
     this.left = null;
     this.right = null;
 }
 
-BTNode.prototype.add = function(val) {
+
+BST.prototype.add = function(val) {
     if (this.root == null){
         this.root = new BTNode(val)
     } else {
@@ -36,7 +38,7 @@ BTNode.prototype.add = function(val) {
     }
 }
 
-BTNode.prototype.remove = function(val, root){
+BST.prototype.remove = function(val, root){
     var runner = this.root;
     while (runner){
     // Compare the node's value with the value
@@ -55,7 +57,7 @@ BTNode.prototype.remove = function(val, root){
 
 
 // Contains method. Find if the tree contains a value
-BTNode.prototype.contains = function(val, root){
+BST.prototype.contains = function(val, root){
     var runner = this.root;
     while (runner){
         if (runner.val == val){
@@ -73,12 +75,16 @@ BTNode.prototype.contains = function(val, root){
 
 
 // var my_BTNode = new BTNode();
-var my_BTNode = new BTNode();
-my_BTNode.add(10);
-my_BTNode.add(15);
-my_BTNode.add(8);
-my_BTNode.add(4);
-console.log(my_BTNode);
+var my_BST = new BST();
+my_BST.add(10);
+my_BST.add(15);
+my_BST.add(8);
+my_BST.add(4);
+console.log(my_BST);
 
-console.log(my_BTNode.contains(15, my_BTNode.root));
+console.log(my_BST.contains(15, my_BST.root));
 // console.log(my_BTNode.remove(15, my_BTNode.root));
+
+
+module.exports.BST = BST;
+module.exports.BTNode = BTNode;
