@@ -1,6 +1,9 @@
 // Determine if an binary tree is a binary search tree
+// http://js-algorithms.tutorialhorizon.com/2015/12/13/determine-if-a-binary-tree-is-a-binary-search-tree/
+
 // Tra­verse the tree in-order and com­pare the cur­rent ele­ment with the pre­vi­ous element
 // Time com­plex­ity: O(N)
+
 function BST(){
     this.root = null;
 }

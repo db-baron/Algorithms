@@ -1,12 +1,21 @@
-# Make a generator that outputs the fibonacci sequence of numbers
+# Make a generator that outputs the fibonacci sequence starting at a and b
+# and ending before an number s
 
-def fibonacci_generator(a, b):
-    while True:
-        yield a
-        a , b = b , a+b
+def fibonacci_generator(a, b, s):
+    # Validate inputs
+    inputList = [a, b, s]
+    for value in inputList:
+        try:
+           int(value)
+        except ValueError:
+           print('Enter a number, please')
+           break
 
-# Print all the numbers of the Fibonacci sequence that are lower than 40
-for i in fibonacci_generator(0, 1):  # set 0 and 1 as the start points
-    if i > 40:
-        break
+        while True:
+            yield a
+            a, b = b, a+b
+            if (b>s):
+                break
+
+for i in fibonacci_generator(0, 1, 8):
     print(i)
