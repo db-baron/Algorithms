@@ -45,13 +45,16 @@ print mult_fasta_reader("/Users/Megatron/Downloads/BRCA1_test.fasta_multsequence
 
 # Caluclate the longest k-mer of length k in sequence seq
 # https://media.readthedocs.org/pdf/khmer/v2.1/khmer.pdf
-ksize = 11 # k-mer size to use
+ksize = 3 # k-mer size to use
 
 # Create a new ktable of size 4^(k-1)+k bytes, suitable for counting k-mers.
 cg = khmer.Countgraph(ksize, 4**ksize, 1)
 
 # load all k-mers from the given string (returns the number of k-mers processed)
-cg.consume('CGCCTAAATAGCCTCGCGGAGCCTTATGTCATACTCGTCCT')
-print(cg.get('CGCCTAAATAG'))
-cg.add('CGCCTAAATAG')
-print(cg.get('CGCCTAAATAG'))
+# cg.consume('CGCCTAAATAGCCTCGCGGAGCCTTATGTCATACTCGTCCT')
+# print(cg.get('CGCCTAAATAG'))
+# cg.add('CGCCTAAATAG')
+# print(cg.get('CGCCTAAATAG'))
+
+cg.consume(books_seq)
+print(cg.get('GCG'))
