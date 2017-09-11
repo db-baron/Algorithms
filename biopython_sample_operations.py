@@ -42,7 +42,6 @@ def mult_fasta_reader(filename):
 print mult_fasta_reader("/Users/Megatron/Downloads/BRCA1_test.fasta_multsequences.fasta")
 
 
-
 # Caluclate the longest k-mer of length k in sequence seq
 # https://media.readthedocs.org/pdf/khmer/v2.1/khmer.pdf
 ksize = 3 # k-mer size to use
@@ -57,4 +56,5 @@ cg = khmer.Countgraph(ksize, 4**ksize, 1)
 # print(cg.get('CGCCTAAATAG'))
 
 cg.consume(books_seq)
+# Print the count of the k-mer
 print(cg.get('GCG'))
