@@ -28,22 +28,23 @@ def is_number(s):
 def character_math(charstr):
     final_output = ""
     substring = ""
+    # Create stack
     for i in charstr:
         myStack.push(i)
-
+    # Start destacking and building substring from characters within brackets
     for m in range(myStack.length() - 2):
         destacked = myStack.pop()
-        # We want to go to the inner-most right bracket
-        if destacked != "]":
+        print "destacked is ", destacked
+        # We want to start with the inner-most right bracket
+        if type(int(destacked)) == int:
+            substring = substring*int(destacked)
+        if destacked not in ["[", "]"]:
             substring += destacked
         if destacked == "[":
-            possible_multiplier = myStack.pop()
-            if is_number(possible_multiplier):
-                final_output += int(possible_multiplier) * substring
-            else:
-                final_output += possible_multiplier[::-1]
-                break
-        final_output += substring[::-1]
+            substring = substring[::-1]
+            print "Found a [, substring is ", substring
+            
+        final_output += substring
     return "Final output is ", final_output
 
 myStack = Stack()

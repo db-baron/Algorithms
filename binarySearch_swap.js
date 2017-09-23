@@ -12,7 +12,7 @@
 //     this.right = null;
 // }
 
-// import BST and BTNode functions from binarySearchTree_add_contains.js to create tree
+// import BST and BTNode functions from binarySearchTree_add_contains.js (for practice)
 var BST = require('./binarySearchTree_add_remove_contains.js').BST
 var BTNode = require('./binarySearchTree_add_remove_contains.js').BTNode
 var my_BST = new BST();
